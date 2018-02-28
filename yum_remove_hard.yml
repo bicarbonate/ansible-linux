@@ -1,0 +1,33 @@
+---
+- hosts: javadev
+  tasks:
+  - name: Removal of IWL* wireless firmware packages
+    yum:
+      name: iwl*
+      state: absent
+
+  - name: Removing RH Network packages
+    yum:
+      name: rhn*
+      state: absent
+
+  - name: Removing Spacewalk packages
+    yum:
+      name: spacewalk*
+      state: absent
+
+  - name: yum-clean-metadata
+    command: yum clean metadata
+    args:
+      warn: no
+
+  tasks:
+  - name: Adding crontab entry for cron_update.sh
+    cron:
+      name: Update-clamav-rkhunter
+      minute: 5
+      hour: 23
+      job: /home/utils/scripts/cron_update.sh
+      state: present
+      user: root
+    become: yes       

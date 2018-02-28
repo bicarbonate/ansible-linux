@@ -1,0 +1,26 @@
+---
+- hosts: javadev
+  tasks:
+  - name: query rpm GeoIP
+    command: "rpm -q GeoIP"
+    register: rpmgeoip
+  - debug: msg="{{ rpmgeoip.stdout_lines  }}" # The _lines is for reporting output
+  - name: remove geoip
+    command: "sudo rpm -e --nodeps {{ rpmgeoip.stdout }}" # Just .stdout is for passing the variable
+    args: 
+     warn: false
+
+  - name: query rpm rhn
+    command: "rpm -q rhn"
+    register: rpmrhn
+  - debug: msg={{ rpmrhn.stdout_lines }}
+  - name: remove rhn*
+    command: "sudo rpm -e --nodeps {{  rpmrhn.stdout  }}"
+    args: 
+     warn: false
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

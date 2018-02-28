@@ -1,0 +1,18 @@
+---
+- hosts: javadev
+  tasks:
+  - name: test
+    blockinfile:
+       path: /etc/profile.d/os-security.sh
+       marker: "------"
+       insertafter: '!#/bin/bash'
+       state: present
+       block: |
+         # Idle users will be removed after 15 minutes #
+         readonly TMOUT=900
+         readonly HISTFILE
+    become: yes
+#    command: chmod +x /etc/profile.d/os-security.sh
+   
+
+

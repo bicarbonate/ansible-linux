@@ -1,0 +1,20 @@
+---
+- hosts: javadev
+  tasks:
+  - name: Adding crontab entry for cron_update.sh
+    cron:
+      name: Update-clamav-rkhunter 
+      minute: 5
+      hour: 23    
+      job: /home/utils/scripts/cron_update.sh
+      state: present
+      user: root
+    become: true
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

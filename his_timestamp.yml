@@ -1,0 +1,16 @@
+---
+- hosts: javadev
+  tasks:
+  - lineinfile:
+       path: ~/.bashrc
+       line: 'export HISTTIMEFORMAT="%d/%m/%y %T "'
+
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#Feb 2018
+#Server Hardening
+

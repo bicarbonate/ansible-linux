@@ -1,0 +1,19 @@
+---
+- hosts: javadev
+  tasks:
+  - name: query rpm
+    command: "rpm -q GeoIP"
+    args:
+     warn: false
+    register: rpmgeoip
+  - debug:
+     var: rpmgeoip.stdout_lines
+     
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

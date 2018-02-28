@@ -1,0 +1,10 @@
+---
+- hosts: javadev
+  tasks:
+  - name: Restricting root access
+    command: echo "tty1" > /etc/securetty && chmod 700 /root
+    args:
+      warn: false
+    register: res_root
+  - debug: msg="{{  res_root.stdout_lines }}"
+

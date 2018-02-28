@@ -1,0 +1,17 @@
+---
+- host: javadev
+  tasks:
+  - name: Disable RHN repo
+    yum_repository: 
+      name: rhn
+      description: Red Hat Network for Spacewalk
+      baseurl: 
+  
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

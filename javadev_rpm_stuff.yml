@@ -1,0 +1,40 @@
+---
+- hosts: javadev
+  tasks:
+   - name: Check if package is installed
+     command: "rpm -q GeoIP | grep 'is installed'"
+     args:
+       warn: false
+     register: is_installed
+     failed_when: no
+     changed_when: no
+
+   - name: Remove if installed
+     command: "rpm -e --nodeps {{ is_installed }}"
+     args:
+       warn: false
+     when: is_installed.rc == 0
+
+  tasks:
+   - name: Check if package is installed
+     command: rpm -qa | grep -q "rhn" && echo 'is_installed' || echo 'not_installed'
+     args:
+       warn: false
+     register: is_installed
+     failed_when: no
+     changed_when: no
+
+   - name: Remove if installed
+     command: "rpm -e --nodeps {{ is_installed }}"
+     args:
+       warn: false
+     when: is_installed.rc == 0
+
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

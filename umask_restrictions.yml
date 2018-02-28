@@ -1,0 +1,22 @@
+---
+- hosts: javadev
+  tasks:
+  - replace: 
+        path: /etc/bashrc
+        regexp: 'umask 002'  
+        replace: 'umask 077'
+    become: yes
+  - replace: 
+        path: /etc/csh.cshrc
+        regexp: '(umask 002)'  
+        replace: 'umask 077'
+    become: yes
+
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

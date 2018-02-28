@@ -1,0 +1,13 @@
+---
+- hosts: javadev
+  tasks:
+  - name: Install Nginx
+    yum: pkg=nginx state=installed update_cache=true
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

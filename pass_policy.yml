@@ -1,0 +1,26 @@
+---
+- hosts: javadev
+  tasks:
+  - name: CentOS Password Policies
+    command: "authconfig --passalgo=sha512 --update"
+    become: yes
+    args:
+      warn: false
+    register: password
+  - debug: msg="{{ password.stdout  }}"
+  - replace:
+      path: /etc/login.defs
+      regexp: '(99999)' 
+      replace: '90'
+    become: yes
+  - replace:
+      path: /etc/login.defs
+      regexp: '(PASS_MIN_DAYS   0)'
+      replace: 'PASS_MIN_DAYS   1'
+    become: yes
+
+
+#Ben Hart
+#Montana Interactive
+#2/27/18
+#Server Hardening

@@ -1,0 +1,6 @@
+- hosts: javadev
+  gather_facts: yes
+
+  tasks:
+  - name: get geopip info
+    command: sudo yum install geopip -y

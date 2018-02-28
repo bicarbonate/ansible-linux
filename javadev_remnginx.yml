@@ -1,0 +1,5 @@
+---
+- hosts: javadev
+  tasks:
+  - name: Remove nginx
+    yum: pkg=nginx state=removed update_cache=true

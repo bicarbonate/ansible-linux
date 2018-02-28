@@ -1,0 +1,24 @@
+---
+- hosts: javadev
+  tasks:
+  - copy:
+      src: ./system-auth-ac
+      dest: /etc/pam.d/system-auth-ac
+      owner: root
+      group: root
+      mode: 0644      
+      backup: yes
+    become: yes
+  tasks:
+  - name: Create tallylog
+    command: touch /var/log/tallylog
+    args:
+      warn: false
+    become: yes
+
+
+
+#Ben Hart
+#Montana Interactive
+#Feb 2018
+#Server Hardening
