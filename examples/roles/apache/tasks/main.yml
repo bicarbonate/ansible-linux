@@ -1,0 +1,21 @@
+---
+- name: install apache
+  yum: name=httpd state=present
+
+- name: create sites dir
+  files: path={{item}} state=directory
+  with_items: "{{apache_dirs}}"
+
+- name: copy index.html
+  template: src=index.html.j2 dest={{apache_docroot}}/index.html
+
+- name: copy the apache config
+  template: src=httpd.com-{{ansible_os_family}}.j2 dest={{apache_config}}  #The first variable target mixed inventory (OS)
+  notify: restart apache  #This calls the next task to start/enable apache
+
+- name: start apache
+  service: name=https state=started enabled=yes
+
+
+
+

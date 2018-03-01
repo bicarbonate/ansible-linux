@@ -1,0 +1,5 @@
+---
+- hosts: web
+  roles:
+     - common
+     - webservers  #both of these would be sub-dirs under /etc/ansible/roles

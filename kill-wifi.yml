@@ -1,0 +1,25 @@
+---
+- name: Blacklisting wireless drivers
+
+  hosts: javadev
+  become: true
+  become_user: root
+  become_method: sudo
+
+
+  tasks:
+
+    - name: Touching /etc/modprobe.d/blacklist-wireless
+      file:
+        path: /etc/modprobe.d/blacklist-wireless
+        state: touch
+
+
+    - name: Identifying all wireless drivers associated with the currently-running kernel.
+      shell: for i in $(find /lib/modules/`uname -r`/kernel/drivers/net/wireless -name "*.ko" -type f) ; do echo blacklist $i >> /etc/modprobe.d/blacklist-wireless ; done
+      become: yes
+      register: identify_drivers
+
+    - name:  Debug msg to deliver identify_drivers
+      debug:
+        msg:  "{{ identify_drivers }}"

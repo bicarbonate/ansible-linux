@@ -1,0 +1,13 @@
+---
+- name: install nto
+  yum name=ntp state=present
+
+- name: configute ntp
+  template: src=ntp.conf.j2 dest=/etc/ntp/conf
+  notify: restart ntp
+
+
+- name: start ntp
+  service: name=ntpd state=started
+
+

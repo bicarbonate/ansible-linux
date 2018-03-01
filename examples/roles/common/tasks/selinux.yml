@@ -1,0 +1,11 @@
+---
+- name: install python bindings
+  yum: name={{items}} state=present
+  with_items:
+  - libselinux-python  #Named packages to be installed
+  - libsemenage-python
+
+- name: Is SELinux running?
+  command: getenforce  #Shell command
+  register: sestatus  #Creating a variable
+  changed_when: false #When the run completes do I mark this as changed or not?

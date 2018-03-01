@@ -1,0 +1,23 @@
+---
+- name: install apache
+  hosts: web
+  become_user: root
+  become: yes
+
+  tasks:
+  - name install epel repo
+    yum: name=epel-release state=present  #name is the name of the pkg, state is installed or not
+
+  - name: install python bindings
+    yum: name={{items}} state=present
+    with_items:
+    - libselinux-python  #Named packages to be installed
+    - libsemenage-python
+
+  - name: Is SELinux running?
+    command: getenforce  #Shell command
+    register: sestatus  #Creating a variable
+    changed_when: false #When the run completes do I mark this as changed or not?
+
+  - name: install apache
+    yum: name=httpd state=present

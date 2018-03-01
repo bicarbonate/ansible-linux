@@ -1,14 +1,14 @@
 ---
 - hosts: javadev
   tasks:
-  - replace: 
+  - replace:
         path: /etc/bashrc
-        regexp: 'umask 002'  
+        regexp: 'umask 002'
         replace: 'umask 077'
     become: yes
-  - replace: 
+  - replace:
         path: /etc/csh.cshrc
-        regexp: '(umask 002)'  
+        regexp: '(umask 002)'
         replace: 'umask 077'
     become: yes
 

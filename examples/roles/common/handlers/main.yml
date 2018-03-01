@@ -1,0 +1,4 @@
+---
+# handlers for common
+- name: restart ntp  #Must match the value for notify:
+  service: name=ntpd state=restarted

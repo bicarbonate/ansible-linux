@@ -1,0 +1,15 @@
+---
+- hosts: javadev
+  - name: Blacklisting wireless drivers
+     file: path: /etc/modprobe.d/blacklist-wireless
+              state: touch
+    command: for i in $(find /lib/modules/`uname -r`/kernel/drivers/net/wireless -name "*.ko" -type f) ; do echo blacklist $i >> /etc/modprobe.d/blacklist-wireless ; done
+    become: yes
+
+
+
+
+#Ben Hart
+#Montana Interactive
+#Feb 2018
+#Server Hardening
