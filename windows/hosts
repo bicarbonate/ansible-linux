@@ -1,0 +1,11 @@
+# file: hosts
+# Windows
+[dev]
+dev-sql-1
+dev-ad-1
+dev-ad-2
+dev-iis-1
+dev-iis-2
+
+
+

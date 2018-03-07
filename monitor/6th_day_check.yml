@@ -1,0 +1,29 @@
+---
+- name: Monitor 6th Day Stuff
+  hosts: DZ
+  become_user: root
+  become: true
+  become_method: sudo
+  vars: #Creating an array
+    paths_to_find:  #Array definition
+      - /chroot/monitor/adr01/upload/
+      - /chroot/monitor/exp01/upload/
+      - /chroot/monitor/chpt/upload/
+      - /chroot/monitor/iix01/upload/
+      - /chroot/monitor/emb01/upload/
+
+  tasks:
+  - name: Verify current month monitor files exist on DZ  
+    find:
+      paths: '{{ paths_to_find }}'  #Calling the array name
+    register: files  #Registering the varibale 'files'
+  - debug:
+      var: files|json_query('files[*].path') #Variable from above piped to json_query then
+      # the query.. files[*].path.  Path is the key inside files that displays what I want
+     #var=files will return EVERY possible key, use it to find teh key you need. 
+
+# Since DZ is special with regards to SSH, teh way to call a custom SSH port from the CLI is
+# ansible-playbook <playbook> --ask-sudo-pass -e ansible_ssh_port=34410
+
+
+
